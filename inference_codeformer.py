@@ -28,11 +28,11 @@ def set_realesrgan():
         num_feat=64,
         num_block=23,
         num_grow_ch=32,
-        scale=2,
+        scale=4,
     )
     upsampler = RealESRGANer(
-        scale=2,
-        model_path="https://github.com/sczhou/CodeFormer/releases/download/v0.1.0/RealESRGAN_x2plus.pth",
+        scale=4,
+        model_path="https://github.com/xinntao/Real-ESRGAN/releases/download/v0.1.0/RealESRGAN_x4plus.pth",
         model=model,
         tile=args.bg_tile,
         tile_pad=40,
