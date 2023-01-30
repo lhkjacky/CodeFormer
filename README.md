@@ -7,9 +7,8 @@
 [Paper](https://arxiv.org/abs/2206.11253) | [Project Page](https://shangchenzhou.com/projects/CodeFormer/) | [Video](https://youtu.be/d3VDpkXlueI)
 
 
-<a href="https://colab.research.google.com/drive/1m52PNveE4PBhYrecj34cnpEeiHcC5LTb?usp=sharing"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="google colab logo"></a> [![Hugging Face](https://img.shields.io/badge/Demo-%F0%9F%A4%97%20Hugging%20Face-blue)](https://huggingface.co/spaces/sczhou/CodeFormer) [![Replicate](https://img.shields.io/badge/Demo-%F0%9F%9A%80%20Replicate-blue)](https://replicate.com/sczhou/codeformer) ![visitors](https://visitor-badge.laobi.icu/badge?page_id=sczhou/CodeFormer)
+<a href="https://colab.research.google.com/drive/1m52PNveE4PBhYrecj34cnpEeiHcC5LTb?usp=sharing"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="google colab logo"></a> [![Hugging Face](https://img.shields.io/badge/Demo-%F0%9F%A4%97%20Hugging%20Face-blue)](https://huggingface.co/spaces/sczhou/CodeFormer) [![Replicate](https://img.shields.io/badge/Demo-%F0%9F%9A%80%20Replicate-blue)](https://replicate.com/sczhou/codeformer) ![visitors](https://visitor-badge-sczhou.glitch.me/badge?page_id=sczhou/CodeFormer)
 
-<!-- ![visitors](https://visitor-badge.glitch.me/badge?page_id=sczhou/CodeFormer) -->
 
 
 [Shangchen Zhou](https://shangchenzhou.com/), [Kelvin C.K. Chan](https://ckkelvinchan.github.io/), [Chongyi Li](https://li-chongyi.github.io/), [Chen Change Loy](https://www.mmlab-ntu.com/person/ccloy/) 
@@ -81,12 +80,12 @@ python basicsr/setup.py develop
 ### Quick Inference
 
 #### Download Pre-trained Models:
-Download the facelib pretrained models from [[Google Drive](https://drive.google.com/drive/folders/1b_3qwrzY_kTQh0-SnBoGBgOrJ_PLZSKm?usp=sharing) | [OneDrive](https://entuedu-my.sharepoint.com/:f:/g/personal/s200094_e_ntu_edu_sg/EvDxR7FcAbZMp_MA9ouq7aQB8XTppMb3-T0uGZ_2anI2mg?e=DXsJFo)] to the `weights/facelib` folder. You can manually download the pretrained models OR download by runing the following command.
+Download the facelib pretrained models from [[Google Drive](https://drive.google.com/drive/folders/1b_3qwrzY_kTQh0-SnBoGBgOrJ_PLZSKm?usp=sharing) | [OneDrive](https://entuedu-my.sharepoint.com/:f:/g/personal/s200094_e_ntu_edu_sg/EvDxR7FcAbZMp_MA9ouq7aQB8XTppMb3-T0uGZ_2anI2mg?e=DXsJFo)] to the `weights/facelib` folder. You can manually download the pretrained models OR download by running the following command.
 ```
 python scripts/download_pretrained_models.py facelib
 ```
 
-Download the CodeFormer pretrained models from [[Google Drive](https://drive.google.com/drive/folders/1CNNByjHDFt0b95q54yMVp6Ifo5iuU6QS?usp=sharing) | [OneDrive](https://entuedu-my.sharepoint.com/:f:/g/personal/s200094_e_ntu_edu_sg/EoKFj4wo8cdIn2-TY2IV6CYBhZ0pIG4kUOeHdPR_A5nlbg?e=AO8UN9)] to the `weights/CodeFormer` folder. You can manually download the pretrained models OR download by runing the following command.
+Download the CodeFormer pretrained models from [[Google Drive](https://drive.google.com/drive/folders/1CNNByjHDFt0b95q54yMVp6Ifo5iuU6QS?usp=sharing) | [OneDrive](https://entuedu-my.sharepoint.com/:f:/g/personal/s200094_e_ntu_edu_sg/EoKFj4wo8cdIn2-TY2IV6CYBhZ0pIG4kUOeHdPR_A5nlbg?e=AO8UN9)] to the `weights/CodeFormer` folder. You can manually download the pretrained models OR download by running the following command.
 ```
 python scripts/download_pretrained_models.py CodeFormer
 ```
@@ -101,7 +100,7 @@ You can put the testing images in the `inputs/TestWhole` folder. If you would li
 🧑🏻 Face Restoration (cropped and aligned face)
 ```
 # For cropped and aligned faces
-python inference_codeformer.py -w 0.5 --has_aligned --input_path [input folder]
+python inference_codeformer.py -w 0.5 --has_aligned --input_path [image folder]|[image path]
 ```
 
 :framed_picture: Whole Image Enhancement
@@ -109,14 +108,18 @@ python inference_codeformer.py -w 0.5 --has_aligned --input_path [input folder]
 # For whole image
 # Add '--bg_upsampler realesrgan' to enhance the background regions with Real-ESRGAN
 # Add '--face_upsample' to further upsample restorated face with Real-ESRGAN
-python inference_codeformer.py -w 0.7 --input_path [image folder/image path]
+python inference_codeformer.py -w 0.7 --input_path [image folder]|[image path]
 ```
 
 :clapper: Video Enhancement
 ```
+# For Windows/Mac users, please install ffmpeg first
+conda install -c conda-forge ffmpeg
+```
+```
 # For video clips
-# Set frame rate of saved video via '--save_video_fps 24'
-python inference_codeformer.py --bg_upsampler realesrgan --face_upsample -w 1.0 --input_path [video path] --save_video_fps 24
+# video path should end with '.mp4'|'.mov'|'.avi'
+python inference_codeformer.py --bg_upsampler realesrgan --face_upsample -w 1.0 --input_path [video path]
 ```
 
 
@@ -143,4 +146,4 @@ This project is licensed under <a rel="license" href="https://github.com/sczhou/
 This project is based on [BasicSR](https://github.com/XPixelGroup/BasicSR). Some codes are brought from [Unleashing Transformers](https://github.com/samb-t/unleashing-transformers), [YOLOv5-face](https://github.com/deepcam-cn/yolov5-face), and [FaceXLib](https://github.com/xinntao/facexlib). We also adopt [Real-ESRGAN](https://github.com/xinntao/Real-ESRGAN) to support background image enhancement. Thanks for their awesome works.
 
 ### Contact
-If you have any question, please feel free to reach me out at `shangchenzhou@gmail.com`.
+If you have any questions, please feel free to reach me out at `shangchenzhou@gmail.com`.
